@@ -62,6 +62,7 @@ export default class Grid
             for(let index_row = 0; index_row < NUM_ROWS; index_row++)
             {
                 this.cells[index_col][index_row].setColor(z_min, z_max);
+                console.log(this.cells[index_col][index_row].red + ',' + this.cells[index_col][index_row].green + ',' + this.cells[index_col][index_row].blue);
             }
         }
     }
