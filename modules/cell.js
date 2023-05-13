@@ -69,9 +69,9 @@ export default class Cell
         if(this.state == STATE_GROUND)
         {
             const z_range = z_max - z_min;
-            this.red = COLOR_GROUND_RED_MIN + Math.floor(this.z * COLOR_GROUND_RED_RANGE / z_range);
-            this.green = COLOR_GROUND_GREEN_MIN + Math.floor(this.z * COLOR_GROUND_GREEN_RANGE / z_range);
-            this.blue = COLOR_GROUND_BLUE_MIN + Math.floor(this.z * COLOR_GROUND_BLUE_RANGE / z_range);
+            this.red = COLOR_GROUND_RED_MIN + Math.floor((this.z - z_min) * COLOR_GROUND_RED_RANGE / z_range);
+            this.green = COLOR_GROUND_GREEN_MIN + Math.floor((this.z - z_min) * COLOR_GROUND_GREEN_RANGE / z_range);
+            this.blue = COLOR_GROUND_BLUE_MIN + Math.floor((this.z - z_min) * COLOR_GROUND_BLUE_RANGE / z_range);
         }
         else if(this.state == STATE_RIVER)
         {

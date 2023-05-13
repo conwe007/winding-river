@@ -2,8 +2,8 @@ import {ctx, canvas} from '../main.js';
 import {randomInt, randomRGB} from './utilities.js';
 import Cell from './cell.js';
 
-const NUM_ROWS = 32;
-const NUM_COLS = 32;
+const NUM_ROWS = 8;
+const NUM_COLS = 8;
 
 const Z_DEFAULT = 100;
 const Z_RANGE = 10;
@@ -56,6 +56,7 @@ export default class Grid
                 }
             }
         }
+        console.log(z_min + ',' + z_max);
 
         for(let index_col = 0; index_col < NUM_COLS; index_col++)
         {
