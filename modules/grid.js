@@ -14,7 +14,6 @@ export default class Grid
 {
     constructor()
     {
-        this.river = [];
         this.cells = [];
 
         for(let index_col = 0; index_col < NUM_COLS; index_col++)
@@ -32,10 +31,14 @@ export default class Grid
             }
         }
 
+        this.river_tail = this.cells[randomInt(0, NUM_COLS - 1)][randomInt(0, NUM_COLS - 1)];
+        this.river_tail.setRiver();
+        console.log(this.river_tail.toString());
+
         // set the first node of the river as a random cell in the top row
-        this.river.unshift(this.cells[randomInt(0, NUM_COLS - 1)][randomInt(0, NUM_COLS - 1)]);
-        this.river[0].setRiver();
-        console.log(this.river[0].toString());
+        // this.river.unshift(this.cells[randomInt(0, NUM_COLS - 1)][randomInt(0, NUM_COLS - 1)]);
+        // this.river[0].setRiver();
+        // console.log(this.river[0].toString());
     }
 
     // set all cells to random z height and set colors
@@ -74,10 +77,10 @@ export default class Grid
 
     setNextRiverNode()
     {
-        console.log(this.river[0].toString());
+        console.log(this.river_tail.toString());
         // last node of the current river
-        const river_tail_index_x = Math.round(this.river[0].x / this.river[0].width);
-        const river_tail_index_y = Math.round(this.river[0].y / this.river[0].height);
+        const river_tail_index_x = Math.round(this.river_tail.x / this.river_tail.width);
+        const river_tail_index_y = Math.round(this.river_tail.y / this.river_tail.height);
         console.log(river_tail_index_x + ',' + river_tail_index_y);
         const cell_max_z = new Cell();
         cell_max_z.z = Number.MAX_SAFE_INTEGER;
@@ -188,8 +191,8 @@ export default class Grid
         //     }
         // }
 
-        this.river.unshift(cell_lowest);
-        this.river[0].setRiver();
+        this.river_tail = cell_lowest;
+        this.river_tail.setRiver();
     }
 
     draw()
