@@ -95,6 +95,23 @@ export default class Cell
         }
     }
 
+    copy(cell)
+    {
+        this.x = cell.x;
+        this.y = cell.y;
+        this.z = cell.z;
+
+        this.width = cell.width;
+        this.height = cell.height;
+
+        this.red = cell.red;
+        this.green = cell.green;
+        this.blue = cell.blue;
+
+        this.state = cell.state;
+        this.change_flag = true;
+    }
+
     toString()
     {
         let output = '';

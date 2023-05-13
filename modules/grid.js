@@ -146,52 +146,7 @@ export default class Grid
             cell_lowest = cell_down;
         }
 
-
-        // // handle cases on the edge of the grid
-        // if(river_tail.x <= 0)
-        // {
-        //     if(river_tail.y <= 0)
-        //     {
-
-        //     }
-        //     else if(river_tail.y >= 0)
-        //     {
-
-        //     }
-        //     else
-        //     {
-
-        //     }
-        // }
-        // else if(river_tail.x >= NUM_COLS)
-        // {
-
-        // }
-        // else
-        // {
-        //     // find the lowest adjacent cell
-        //     const cell_left = this.cells[river_tail.x - 1][river_tail.y + 0];
-        //     const cell_right = this.cells[river_tail.x + 1][river_tail.y + 0];
-        //     const cell_up = this.cells[river_tail.x + 0][river_tail.y - 1];
-        //     const cell_down = this.cells[river_tail.x + 0][river_tail.y + 1];
-
-        //     cell_lowest = cell_left;
-
-        //     if(cell_up.isGround() && cell_up.z < cell_lowest)
-        //     {
-        //         cell_lowest = cell_up;
-        //     }
-        //     if(cell_up.isGround() && cell_right.z < cell_lowest)
-        //     {
-        //         cell_lowest = cell_right;
-        //     }
-        //     if(cell_up.isGround() && cell_down.z < cell_lowest)
-        //     {
-        //         cell_lowest = cell_down;
-        //     }
-        // }
-
-        this.river_tail = cell_lowest;
+        this.river_tail.copy(cell_lowest);
         this.river_tail.setRiver();
     }
 
