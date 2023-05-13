@@ -1,7 +1,6 @@
 import {ctx, canvas} from '../main.js';
 import {randomInt, randomRGB} from './utilities.js';
 import Cell from './cell.js';
-import River from './river.js';
 
 const NUM_ROWS = 128;
 const NUM_COLS = 128;
@@ -31,14 +30,9 @@ export default class Grid
             }
         }
 
-        this.river_tail = this.cells[randomInt(0, NUM_COLS - 1)][randomInt(0, NUM_COLS - 1)];
-        this.river_tail.setRiver();
-        console.log(this.river_tail.toString());
-
-        // set the first node of the river as a random cell in the top row
-        // this.river.unshift(this.cells[randomInt(0, NUM_COLS - 1)][randomInt(0, NUM_COLS - 1)]);
-        // this.river[0].setRiver();
-        // console.log(this.river[0].toString());
+        // x and y indexes of leading river cell
+        this.index_x_river = randomInt(0, NUM_COLS - 1);
+        this.index_y_river = randomInt(0, NUM_ROWS - 1);
     }
 
     // set all cells to random z height and set colors
@@ -77,77 +71,70 @@ export default class Grid
 
     setNextRiverNode()
     {
-        console.log(this.river_tail.toString());
-        // last node of the current river
-        const river_tail_index_x = Math.round(this.river_tail.x / this.river_tail.width);
-        const river_tail_index_y = Math.round(this.river_tail.y / this.river_tail.height);
-        console.log(river_tail_index_x + ',' + river_tail_index_y);
-        const cell_max_z = new Cell();
-        cell_max_z.z = Number.MAX_SAFE_INTEGER;
+        const z_max = Number.MAX_SAFE_INTEGER;
 
-        let cell_lowest = null;
-        let cell_left = null;
-        let cell_right = null;
-        let cell_up = null;
-        let cell_down = null;
+        let z_lowest = z_max;
 
-        if(river_tail_index_x <= 0)
+        let z_left = z_max;
+        let z_right = z_max;
+        let z_up = z_max;
+        let z_down = z_max;
+
+        // bounds checking, do not let the river flow off-grid
+        if(this.index_x_river > 0)
         {
-            cell_left = cell_max_z;
+            z_left = this.cells[this.index_x_river - 1][this.index_y_river + 0].z;
         }
-        else
+        if(this.index_x_river < NUM_COLS - 1)
         {
-            cell_left = this.cells[river_tail_index_x - 1][river_tail_index_y + 0];
+            z_right = this.cells[this.index_x_river + 1][this.index_y_river + 0].z;
         }
-        
-        if(river_tail_index_x >= NUM_COLS)
+        if(this.index_y_river > 0)
         {
-            cell_right = cell_max_z;
+            z_up = this.cells[this.index_x_river + 0][this.index_y_river - 1].z;
         }
-        else
+        if(this.index_y_river < NUM_ROWS - 1)
         {
-            cell_right = this.cells[river_tail_index_x + 1][river_tail_index_y + 0];
+            z_down = this.cells[this.index_x_river + 0][this.index_y_river + 1].z;
         }
 
-        if(river_tail_index_y <= 0)
+        // determine lowest z direction
+        if(this.cells[this.index_x_river - 1][this.index_y_river + 0].isGround() && z_left < z_lowest)
         {
-            cell_up = cell_max_z;
+            z_lowest = z_left;
         }
-        else
+        if(this.cells[this.index_x_river + 0][this.index_y_river - 1].isGround() && z_up.z < z_lowest)
         {
-            cell_up = this.cells[river_tail_index_x + 0][river_tail_index_y - 1];
+            z_lowest = z_up;
         }
-
-        if(river_tail_index_y >= NUM_ROWS)
+        if(this.cells[this.index_x_river + 1][this.index_y_river + 0].isGround() && z_right < z_lowest)
         {
-            cell_down = cell_max_z;
+            z_lowest = z_right;
         }
-        else
+        if(this.cells[this.index_x_river + 0][this.index_y_river + 1].isGround() && z_down < z_lowest)
         {
-            cell_down = this.cells[river_tail_index_x + 0][river_tail_index_y + 1];
-        }
-
-        cell_lowest = cell_max_z;
-
-        if(cell_left.isGround() && cell_left.z < cell_lowest)
-        {
-            cell_lowest = cell_left;
-        }
-        if(cell_up.isGround() && cell_up.z < cell_lowest)
-        {
-            cell_lowest = cell_up;
-        }
-        if(cell_right.isGround() && cell_right.z < cell_lowest)
-        {
-            cell_lowest = cell_right;
-        }
-        if(cell_down.isGround() && cell_down.z < cell_lowest)
-        {
-            cell_lowest = cell_down;
+            z_lowest = z_down;
         }
 
-        this.river_tail.copy(cell_lowest);
-        this.river_tail.setRiver();
+        // set coordinates of leading river cell to lowest z direction
+        if(z_lowest == z_left)
+        {
+            this.index_x_river--;
+        }
+        else if(z_lowest == z_right)
+        {
+            this.index_x_river++
+        }
+        else if(z_lowest == z_up)
+        {
+            this.index_y_river--;
+        }
+        else if(z_lowest == z_down)
+        {
+            this.index_y_river++;
+        }
+
+        this.cells[this.index_x_river][this.index_y_river].setRiver();
     }
 
     draw()
