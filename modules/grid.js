@@ -1,5 +1,6 @@
 import {ctx, canvas} from '../main.js';
 import {randomInt, randomRGB} from './utilities.js';
+import Cell from './cell.js';
 
 const NUM_ROWS = 32;
 const NUM_COLS = 32;
