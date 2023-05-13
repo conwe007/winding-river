@@ -33,7 +33,7 @@ export default class Grid
         }
 
         // set the first node of the river as a random cell in the top row
-        this.river.push(this.cells[randomInt(0, NUM_COLS - 1)][0]);
+        this.river.unshift(this.cells[randomInt(0, NUM_COLS - 1)][0]);
         this.river[0].setRiver();
     }
 
@@ -73,7 +73,118 @@ export default class Grid
         }
     }
 
+    setNextRiverNode()
+    {
+        // last node of the current river
+        const river_tail = this.river[this.river.length - 1];
+        const cell_max_z = new Cell();
+        cell_max_z.z = Number.MAX_SAFE_INTEGER;
 
+        let cell_lowest = null;
+        let cell_left = null;
+        let cell_right = null;
+        let cell_up = null;
+        let cell_down = null;
+
+        if(river_tail.x <= 0)
+        {
+            cell_left = cell_max_z;
+        }
+        else
+        {
+            cell_left = this.cells[river_tail.x - 1][river_tail.y + 0];
+        }
+        
+        if(river_tail.x >= NUM_COLS)
+        {
+            cell_right = cell_max_z;
+        }
+        else
+        {
+            cell_right = this.cells[river_tail.x + 1][river_tail.y + 0];
+        }
+
+        if(river_tail.y <= 0)
+        {
+            cell_up = cell_max_z;
+        }
+        else
+        {
+            cell_up = this.cells[river_tail.x + 0][river_tail.y - 1];
+        }
+
+        if(river_tail.y >= NUM_ROWS)
+        {
+            cell_down = cell_max_z;
+        }
+        else
+        {
+            cell_down = this.cells[river_tail.x + 0][river_tail.y + 1];
+        }
+
+        cell_lowest = cell_left;
+
+        if(cell_up.isGround() && cell_up.z < cell_lowest)
+        {
+            cell_lowest = cell_up;
+        }
+        if(cell_up.isGround() && cell_right.z < cell_lowest)
+        {
+            cell_lowest = cell_right;
+        }
+        if(cell_up.isGround() && cell_down.z < cell_lowest)
+        {
+            cell_lowest = cell_down;
+        }
+
+
+        // // handle cases on the edge of the grid
+        // if(river_tail.x <= 0)
+        // {
+        //     if(river_tail.y <= 0)
+        //     {
+
+        //     }
+        //     else if(river_tail.y >= 0)
+        //     {
+
+        //     }
+        //     else
+        //     {
+
+        //     }
+        // }
+        // else if(river_tail.x >= NUM_COLS)
+        // {
+
+        // }
+        // else
+        // {
+        //     // find the lowest adjacent cell
+        //     const cell_left = this.cells[river_tail.x - 1][river_tail.y + 0];
+        //     const cell_right = this.cells[river_tail.x + 1][river_tail.y + 0];
+        //     const cell_up = this.cells[river_tail.x + 0][river_tail.y - 1];
+        //     const cell_down = this.cells[river_tail.x + 0][river_tail.y + 1];
+
+        //     cell_lowest = cell_left;
+
+        //     if(cell_up.isGround() && cell_up.z < cell_lowest)
+        //     {
+        //         cell_lowest = cell_up;
+        //     }
+        //     if(cell_up.isGround() && cell_right.z < cell_lowest)
+        //     {
+        //         cell_lowest = cell_right;
+        //     }
+        //     if(cell_up.isGround() && cell_down.z < cell_lowest)
+        //     {
+        //         cell_lowest = cell_down;
+        //     }
+        // }
+
+        this.river.unshift(cell_lowest);
+        this.river[0].setRiver();
+    }
 
     draw()
     {

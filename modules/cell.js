@@ -34,6 +34,7 @@ export default class Cell
         this.blue = COLOR_GROUND_BLUE_MIN;
 
         this.state = STATE_GROUND;
+        this.change_flag = true;
     }
 
 
@@ -54,11 +55,13 @@ export default class Cell
 
     setGround()
     {
+        this.change_flag = true;
         this.state = STATE_GROUND;
     }
 
     setRiver()
     {
+        this.change_flag = true;
         this.state = STATE_RIVER;
     }
 
@@ -83,9 +86,13 @@ export default class Cell
 
     draw()
     {
-        ctx.beginPath();
-        ctx.fillStyle = `rgb(${this.red},${this.green},${this.blue})`;
-        ctx.fillRect(this.x, this.y, this.width, this.height);
+        if(this.change_flag == true)
+        {
+            this.change_flag = false;
+            ctx.beginPath();
+            ctx.fillStyle = `rgb(${this.red},${this.green},${this.blue})`;
+            ctx.fillRect(this.x, this.y, this.width, this.height);
+        }
     }
 
     toString()

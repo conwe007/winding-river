@@ -1,6 +1,8 @@
 import Cell from './modules/cell.js';
 import Grid from './modules/grid.js';
 
+const TIME_DELAY = 100;
+
 // setup canvas
 const canvas = document.querySelector('canvas');
 const ctx = canvas.getContext('2d');
@@ -15,12 +17,14 @@ let counter = 0;
 
 const grid = new Grid();
 grid.initialize();
+grid.draw();
 
 
 function loop()
 {
-    
+    const time_start = Date.now();
 
+    grid.setNextRiverNode();
     grid.draw();
 
     counter++;
@@ -29,6 +33,8 @@ function loop()
 
         counter = 0;
     }
+
+    while(Date.now() < time_start + TIME_DELAY);
 
     requestAnimationFrame(loop);
 }
