@@ -74,6 +74,7 @@ export default class Grid
 
     setNextRiverNode()
     {
+        console.log(this.river[0].toString());
         // last node of the current river
         const river_tail_index_x = Math.round(this.river[0].x / this.river[0].width);
         const river_tail_index_y = Math.round(this.river[0].y / this.river[0].height);
