@@ -5,17 +5,21 @@ import Grid from './modules/grid.js';
 const canvas = document.querySelector('canvas');
 const ctx = canvas.getContext('2d');
 
-const width = canvas.width = window.innerWidth;
-const height = canvas.height = window.innerHeight;
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
 
 let counter = 0;
+
+const grid = new Grid();
+grid.initialize();
+
 
 function loop()
 {
     ctx.fillStyle = "rgba(0, 0, 0, 0.25)";
-    ctx.fillRect(0, 0, width, height);
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-    
+    grid.draw();
 
     counter++;
     if(counter > 1000)
@@ -29,4 +33,4 @@ function loop()
 
 loop();
 
-export {ctx, width, height};
+export {ctx, canvas};
