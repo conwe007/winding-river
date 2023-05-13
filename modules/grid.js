@@ -135,7 +135,7 @@ export default class Grid
         }
 
         this.cells[this.index_x_river][this.index_y_river].setRiver();
-        console.log(this.cells[this.index_x_river][this.index_y_river]);
+        console.log(this.cells[this.index_x_river][this.index_y_river].toString());
     }
 
     draw()
