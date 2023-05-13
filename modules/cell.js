@@ -63,6 +63,9 @@ export default class Cell
     {
         this.change_flag = true;
         this.state = STATE_RIVER;
+        this.red = COLOR_RIVER_RED;
+        this.green = COLOR_RIVER_GREEN;
+        this.blue = COLOR_RIVER_BLUE;
     }
 
 
