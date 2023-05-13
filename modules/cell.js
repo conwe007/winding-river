@@ -33,7 +33,7 @@ export default class Cell
         this.green = COLOR_GROUND_GREEN_MIN;
         this.blue = COLOR_GROUND_BLUE_MIN;
 
-        this.state = STATE_ERROR;
+        this.state = STATE_GROUND;
     }
 
 
