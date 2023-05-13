@@ -99,21 +99,33 @@ export default class Grid
         }
 
         // determine lowest z direction
-        if(this.cells[this.index_x_river - 1][this.index_y_river + 0].isGround() && z_left < z_lowest)
+        if(z_left < z_lowest)
         {
-            z_lowest = z_left;
+            if(this.cells[this.index_x_river - 1][this.index_y_river + 0].isGround())
+            {
+                z_lowest = z_left;
+            }
         }
-        if(this.cells[this.index_x_river + 0][this.index_y_river - 1].isGround() && z_up.z < z_lowest)
+        if(z_up.z < z_lowest)
         {
-            z_lowest = z_up;
+            if(this.cells[this.index_x_river + 0][this.index_y_river - 1].isGround())
+            {
+                z_lowest = z_up;
+            }
         }
-        if(this.cells[this.index_x_river + 1][this.index_y_river + 0].isGround() && z_right < z_lowest)
+        if(z_right < z_lowest)
         {
-            z_lowest = z_right;
+            if(this.cells[this.index_x_river + 1][this.index_y_river + 0].isGround())
+            {
+                z_lowest = z_right;
+            }
         }
-        if(this.cells[this.index_x_river + 0][this.index_y_river + 1].isGround() && z_down < z_lowest)
+        if(z_down < z_lowest)
         {
-            z_lowest = z_down;
+            if(this.cells[this.index_x_river + 0][this.index_y_river + 1].isGround())
+            {
+                z_lowest = z_down;
+            }
         }
 
         // set coordinates of leading river cell to lowest z direction
