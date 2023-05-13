@@ -33,7 +33,7 @@ export default class Grid
         }
 
         // set the first node of the river as a random cell in the top row
-        this.river.unshift(this.cells[randomInt(0, NUM_COLS - 1)][0]);
+        this.river.unshift(this.cells[randomInt(0, NUM_COLS - 1)][this.cells[randomInt(0, NUM_COLS - 1)]);
         this.river[0].setRiver();
     }
 
@@ -61,14 +61,12 @@ export default class Grid
                 }
             }
         }
-        console.log(z_min + ',' + z_max);
 
         for(let index_col = 0; index_col < NUM_COLS; index_col++)
         {
             for(let index_row = 0; index_row < NUM_ROWS; index_row++)
             {
                 this.cells[index_col][index_row].setColor(z_min, z_max);
-                console.log(this.cells[index_col][index_row].red + ',' + this.cells[index_col][index_row].green + ',' + this.cells[index_col][index_row].blue);
             }
         }
     }
