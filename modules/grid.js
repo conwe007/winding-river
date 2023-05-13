@@ -14,7 +14,7 @@ export default class Grid
 {
     constructor()
     {
-        this.river = new River();
+        this.river = [];
         this.cells = [];
 
         for(let index_col = 0; index_col < NUM_COLS; index_col++)
@@ -33,9 +33,9 @@ export default class Grid
         }
 
         // set the first node of the river as a random cell in the top row
-        this.river.add(this.cells[randomInt(0, NUM_COLS - 1)][0]);
+        this.river.push(this.cells[randomInt(0, NUM_COLS - 1)][0]);
+        this.river[0].setRiver();
     }
-
 
     // set all cells to random z height and set colors
     initialize()
@@ -72,6 +72,8 @@ export default class Grid
             }
         }
     }
+
+
 
     draw()
     {
