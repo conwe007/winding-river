@@ -33,7 +33,7 @@ export default class Grid
         }
 
         // set the first node of the river as a random cell in the top row
-        this.river.unshift(this.cells[randomInt(0, NUM_COLS - 1)][this.cells[randomInt(0, NUM_COLS - 1)]);
+        this.river.unshift(this.cells[randomInt(0, NUM_COLS - 1)][randomInt(0, NUM_COLS - 1)]);
         this.river[0].setRiver();
     }
 
@@ -90,7 +90,7 @@ export default class Grid
         }
         else
         {
-            cell_left = this.cells[(this.river[0].x) - 1][this.river[0].y + 0];
+            cell_left = this.cells[this.river[0].x - 1][this.river[0].y + 0];
         }
         
         if(this.river[0].x >= NUM_COLS)
