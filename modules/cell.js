@@ -97,6 +97,13 @@ export default class Cell
 
     toString()
     {
+        let output = '';
 
+        output += '(' + this.x + ',' + this.y + ',' + this.z + ')\n';
+        output += 'w: ' + this.width + ', h: ' + this.height + '\n';
+        output += '(r-' + this.red + ',g-' + this.green + ',b-' + this.blue + ')\n';
+        output += 's: ' + this.state + ', cf: ' + this.change_flag;
+
+        return output;
     }
 }

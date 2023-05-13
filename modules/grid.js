@@ -35,6 +35,7 @@ export default class Grid
         // set the first node of the river as a random cell in the top row
         this.river.unshift(this.cells[randomInt(0, NUM_COLS - 1)][randomInt(0, NUM_COLS - 1)]);
         this.river[0].setRiver();
+        console.log(this.river[0].toString());
     }
 
     // set all cells to random z height and set colors
