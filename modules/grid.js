@@ -106,7 +106,7 @@ export default class Grid
                 z_lowest = z_left;
             }
         }
-        if(z_up.z < z_lowest)
+        if(z_up < z_lowest)
         {
             if(this.cells[this.index_x_river + 0][this.index_y_river - 1].isGround())
             {

@@ -1,7 +1,7 @@
 import Cell from './modules/cell.js';
 import Grid from './modules/grid.js';
 
-const TIME_DELAY = 1000;
+const TIME_DELAY = 333;
 
 // setup canvas
 const canvas = document.querySelector('canvas');
