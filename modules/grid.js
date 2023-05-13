@@ -77,6 +77,7 @@ export default class Grid
         // last node of the current river
         const river_tail_index_x = Math.round(this.river[0].x / this.river[0].width);
         const river_tail_index_y = Math.round(this.river[0].y / this.river[0].height);
+        console.log(river_tail_index_x + ',' + river_tail_index_y);
         const cell_max_z = new Cell();
         cell_max_z.z = Number.MAX_SAFE_INTEGER;
 
