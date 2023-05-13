@@ -84,7 +84,7 @@ export default class Cell
     draw()
     {
         ctx.beginPath();
-        ctx.fillStyle = 'rgb(${this.red}, ${this.green}, ${this.blue})';
+        ctx.fillStyle = `rgb(${this.red},${this.green},${this.blue})`;
         ctx.fillRect(this.x, this.y, this.width, this.height);
     }
 
