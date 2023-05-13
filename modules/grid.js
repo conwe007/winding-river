@@ -76,7 +76,7 @@ export default class Grid
     setNextRiverNode()
     {
         // last node of the current river
-        const river_tail = this.river[this.river.length - 1];
+        const river_tail = this.river[0];
         const cell_max_z = new Cell();
         cell_max_z.z = Number.MAX_SAFE_INTEGER;
 
