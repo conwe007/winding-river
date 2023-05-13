@@ -74,7 +74,8 @@ export default class Grid
     setNextRiverNode()
     {
         // last node of the current river
-        const river_tail = this.river[0];
+        const river_tail_index_x = Math.round(this.river[0].x / this.river[0].width);
+        const river_tail_index_y = Math.round(this.river[0].y / this.river[0].height);
         const cell_max_z = new Cell();
         cell_max_z.z = Number.MAX_SAFE_INTEGER;
 
@@ -84,53 +85,57 @@ export default class Grid
         let cell_up = null;
         let cell_down = null;
 
-        if(this.river[0].x <= 0)
+        if(river_tail_index_x <= 0)
         {
             cell_left = cell_max_z;
         }
         else
         {
-            cell_left = this.cells[this.river[0].x - 1][this.river[0].y + 0];
+            cell_left = this.cells[river_tail_index_x - 1][river_tail_index_y + 0];
         }
         
-        if(this.river[0].x >= NUM_COLS)
+        if(river_tail_index_x >= NUM_COLS)
         {
             cell_right = cell_max_z;
         }
         else
         {
-            cell_right = this.cells[this.river[0].x + 1][this.river[0].y + 0];
+            cell_right = this.cells[river_tail_index_x + 1][river_tail_index_y + 0];
         }
 
-        if(this.river[0].y <= 0)
+        if(river_tail_index_y <= 0)
         {
             cell_up = cell_max_z;
         }
         else
         {
-            cell_up = this.cells[this.river[0].x + 0][this.river[0].y - 1];
+            cell_up = this.cells[river_tail_index_x + 0][river_tail_index_y - 1];
         }
 
-        if(this.river[0].y >= NUM_ROWS)
+        if(river_tail_index_y >= NUM_ROWS)
         {
             cell_down = cell_max_z;
         }
         else
         {
-            cell_down = this.cells[this.river[0].x + 0][this.river[0].y + 1];
+            cell_down = this.cells[river_tail_index_x + 0][river_tail_index_y + 1];
         }
 
-        cell_lowest = cell_left;
+        cell_lowest = cell_max_z;
 
+        if(cell_left.isGround() && cell_left.z < cell_lowest)
+        {
+            cell_lowest = cell_left;
+        }
         if(cell_up.isGround() && cell_up.z < cell_lowest)
         {
             cell_lowest = cell_up;
         }
-        if(cell_up.isGround() && cell_right.z < cell_lowest)
+        if(cell_right.isGround() && cell_right.z < cell_lowest)
         {
             cell_lowest = cell_right;
         }
-        if(cell_up.isGround() && cell_down.z < cell_lowest)
+        if(cell_down.isGround() && cell_down.z < cell_lowest)
         {
             cell_lowest = cell_down;
         }

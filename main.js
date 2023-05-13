@@ -7,8 +7,8 @@ const TIME_DELAY = 100;
 const canvas = document.querySelector('canvas');
 const ctx = canvas.getContext('2d');
 
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
+canvas.width = 1024;//window.innerWidth;
+canvas.height = 1024;//window.innerHeight;
 
 ctx.fillStyle = "rgba(0, 0, 0, 0.25)";
 ctx.fillRect(0, 0, canvas.width, canvas.height);
