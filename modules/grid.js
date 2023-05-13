@@ -84,40 +84,40 @@ export default class Grid
         let cell_up = null;
         let cell_down = null;
 
-        if(river_tail.x <= 0)
+        if(this.river[0].x <= 0)
         {
             cell_left = cell_max_z;
         }
         else
         {
-            cell_left = this.cells[river_tail.x - 1][river_tail.y + 0];
+            cell_left = this.cells[(this.river[0].x) - 1][this.river[0].y + 0];
         }
         
-        if(river_tail.x >= NUM_COLS)
+        if(this.river[0].x >= NUM_COLS)
         {
             cell_right = cell_max_z;
         }
         else
         {
-            cell_right = this.cells[river_tail.x + 1][river_tail.y + 0];
+            cell_right = this.cells[this.river[0].x + 1][this.river[0].y + 0];
         }
 
-        if(river_tail.y <= 0)
+        if(this.river[0].y <= 0)
         {
             cell_up = cell_max_z;
         }
         else
         {
-            cell_up = this.cells[river_tail.x + 0][river_tail.y - 1];
+            cell_up = this.cells[this.river[0].x + 0][this.river[0].y - 1];
         }
 
-        if(river_tail.y >= NUM_ROWS)
+        if(this.river[0].y >= NUM_ROWS)
         {
             cell_down = cell_max_z;
         }
         else
         {
-            cell_down = this.cells[river_tail.x + 0][river_tail.y + 1];
+            cell_down = this.cells[this.river[0].x + 0][this.river[0].y + 1];
         }
 
         cell_lowest = cell_left;
