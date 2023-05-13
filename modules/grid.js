@@ -1,6 +1,7 @@
 import {ctx, canvas} from '../main.js';
 import {randomInt, randomRGB} from './utilities.js';
 import Cell from './cell.js';
+import River from './river.js';
 
 const NUM_ROWS = 128;
 const NUM_COLS = 128;
@@ -13,6 +14,7 @@ export default class Grid
 {
     constructor()
     {
+        this.river = new River();
         this.cells = [];
 
         for(let index_col = 0; index_col < NUM_COLS; index_col++)
@@ -29,6 +31,9 @@ export default class Grid
                 this.cells[index_col][index_row] = new Cell(cell_x, cell_y, Z_DEFAULT, cell_width, cell_height);
             }
         }
+
+        // set the first node of the river as a random cell in the top row
+        this.river.add(this.cells[randomInt(0, NUM_COLS - 1)][0]);
     }
 
 
